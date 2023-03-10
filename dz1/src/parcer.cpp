@@ -50,7 +50,7 @@ void parcer_line(std::string& line, std::string& date, std::vector<Entity>& enti
     
     }
     
-    if (flag_adult && flag_date) {
+    if (flag_adult && flag_date && flag_title_type) {
         Entity e1 = {title, flag_rus};
         entity.push_back(e1);
     }
