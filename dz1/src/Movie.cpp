@@ -1,4 +1,5 @@
-#include "../include/Movie.hpp"
+// Copyright 2023 Kosmatoff
+#include "Movie.hpp"
 
 void cout_movie(std::vector<Movie>& movies) {
     std::sort(movies.begin(), movies.end(), Comparator_Movie());

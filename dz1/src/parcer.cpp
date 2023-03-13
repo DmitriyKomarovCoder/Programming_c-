@@ -1,25 +1,30 @@
-#include "../include/parcer.hpp"
+// Copyright 2023 Kosmatoff
+#include "parcer.hpp"
 
-bool read_ratings_file(const std::string& file_name_ratings, std::unordered_map<std::string, float>& title_rating) { // читаем и сохраняем в map данные по условию > 1000
+bool read_ratings_file(
+    const std::string& file_name_ratings,
+    /* title_rating - ассоциативный массив, сопоставляющий
+       названиям фильмов с их рейтингом. */
+    std::unordered_map<std::string, float>& title_rating
+) {
     std::ifstream file_ratings(file_name_ratings);
     if (!file_ratings.is_open()) {
         return false;
     }
 
     std::string line;
-    std::getline(file_ratings, line); 
-    std::string tconst, average_Rating, num_Votes; 
+    std::getline(file_ratings, line);  // пропускаем заголовок
+    std::string tconst, average_Rating, num_Votes;
 
-    while (std::getline(file_ratings, line)) { // читаем данные из файла
+    while (std::getline(file_ratings, line)) {
         std::stringstream ss(line);
-        std::string tconst, average_Rating, num_Votes; 
 
         std::getline(ss, tconst, splitter);
         std::getline(ss, average_Rating, splitter);
         std::getline(ss, num_Votes, splitter);
         
         int num_votes = std::stoi(num_Votes);
-        if (num_votes >= 1000) { // проверка на условия по рейтингу
+        if (num_votes >= 1000) {  // проверка на условие по рейтингу
             float rating = std::stof(average_Rating);
             title_rating[tconst] = rating;
         }
@@ -27,15 +32,19 @@ bool read_ratings_file(const std::string& file_name_ratings, std::unordered_map<
     return true;
 }
 
-bool read_title_file(const std::string& file_name_title, std::unordered_map<std::string, // читаем и сохраняем в map данные по условию "RU"
-                     std::string>& title_rus) {
-                      
+bool read_title_file(
+    const std::string& file_name_title,
+    /* title_rus - ассоциативный массив, сопоставляющий
+       названиям фильмов на английском языке их переводы
+       на русский язык. */
+    std::unordered_map<std::string, std::string>& title_rus
+) {
     std::ifstream file_title(file_name_title);
     if (!file_title.is_open()) {
         return false;
     }
     std::string line;
-    std::getline(file_title, line); 
+    std::getline(file_title, line);  // пропускаем заголовок
     std::string title_id, indif, title_language, language;
 
     while (std::getline(file_title, line)) {
@@ -53,21 +62,22 @@ bool read_title_file(const std::string& file_name_title, std::unordered_map<std:
     return true;
 }
 
-bool read_basics_file(const std::string& file_name_basics, const std::string& date, 
-                      const std::unordered_map<std::string, float>& title_rating, 
-                      const std::unordered_map<std::string, std::string>& title_rus, 
-                      std::vector<Movie>& movies) {
+bool read_basics_file(
+    const std::string& file_name_basics, const std::string& date,
+    const std::unordered_map<std::string, float>& title_rating,
+    const std::unordered_map<std::string, std::string>& title_rus,
+    std::vector<Movie>& movies
+) {
     std::ifstream file_basics(file_name_basics);
     if (!file_basics.is_open()) {
         return false;
     }
     std::string line;
-    std::getline(file_basics, line); // пропуск заголовка
-
+    std::getline(file_basics, line);  // пропуск заголовка
+    std::string tconst, title_type, primary_title;
+    std::string original_title, is_adult_str, start_year_str;
     while (std::getline(file_basics, line)) {
-        
         std::stringstream ss(line);
-        std::string tconst, title_type, primary_title, original_title, is_adult_str, start_year_str;
 
         std::getline(ss, tconst, splitter);
         std::getline(ss, title_type, splitter);
@@ -76,7 +86,12 @@ bool read_basics_file(const std::string& file_name_basics, const std::string& da
         std::getline(ss, is_adult_str, splitter);
         std::getline(ss, start_year_str, splitter);
 
-        if ( (title_type == movie || title_type == movie_tv) && !std::stoi(is_adult_str) && start_year_str == date) {
+        // зададим условия проверки
+        bool is_movie = (title_type == movie || title_type == movie_tv);
+        bool is_not_adult = !std::stoi(is_adult_str);
+        bool is_same_year = (start_year_str == date);
+
+        if (is_movie && is_not_adult && is_same_year) {
             auto it_rating = title_rating.find(tconst);
             if (it_rating != title_rating.end()) {
                 std::string title = primary_title;

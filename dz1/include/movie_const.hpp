@@ -1,3 +1,4 @@
+// Copyright 2023 Kosmatoff
 #pragma once
 
 static const char splitter = '\t';
