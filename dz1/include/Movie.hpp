@@ -8,6 +8,7 @@
 #include <vector>
 #include <algorithm>
 
+// хранит заголовки фильмов и их рейтинг
 struct Movie {
     std::string title;
     double rating;
@@ -19,6 +20,3 @@ struct Comparator_Movie {
         return a.rating > b.rating;
     }
 };
-
-// вывод значений на экран
-void cout_movie(std::vector<Movie>& movies);

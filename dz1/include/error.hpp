@@ -5,8 +5,16 @@
 #include <string>
 #include <vector>
 
+#include <fstream>
+
+// проверка файлов
+bool function_checking_files(
+    const std::string& file_name_title,
+    const std::string& file_name_ratings,
+    const std::string& file_name_basics);
+
 // происходит проверк аргументов и их объявления
-bool checking_arguments(
+bool function_checking_arguments(
     int num, char *argument[],
     std::string& file_name_title,
     std::string& file_name_ratings,

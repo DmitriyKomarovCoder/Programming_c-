@@ -10,5 +10,5 @@ add_executable(dz1
     src/main.cpp
     src/error.cpp
     src/Movie.cpp
-    src/parcer.cpp
+    src/Parser.cpp
 )

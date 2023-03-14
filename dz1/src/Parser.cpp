@@ -1,16 +1,10 @@
 // Copyright 2023 Kosmatoff
-#include "parcer.hpp"
 
-bool read_ratings_file(
-    const std::string& file_name_ratings,
-    /* title_rating - ассоциативный массив, сопоставляющий
-       названиям фильмов с их рейтингом. */
-    std::unordered_map<std::string, float>& title_rating
-) {
+#include "Parser.hpp"
+#include "movie_const.hpp"
+
+void Parser::parse_ratings_file(std::string file_name_ratings) {
     std::ifstream file_ratings(file_name_ratings);
-    if (!file_ratings.is_open()) {
-        return false;
-    }
 
     std::string line;
     std::getline(file_ratings, line);  // пропускаем заголовок
@@ -29,20 +23,11 @@ bool read_ratings_file(
             title_rating[tconst] = rating;
         }
     }
-    return true;
 }
 
-bool read_title_file(
-    const std::string& file_name_title,
-    /* title_rus - ассоциативный массив, сопоставляющий
-       названиям фильмов на английском языке их переводы
-       на русский язык. */
-    std::unordered_map<std::string, std::string>& title_rus
-) {
+void Parser::parse_title_file(std::string file_name_title) {
     std::ifstream file_title(file_name_title);
-    if (!file_title.is_open()) {
-        return false;
-    }
+
     std::string line;
     std::getline(file_title, line);  // пропускаем заголовок
     std::string title_id, indif, title_language, language;
@@ -59,19 +44,11 @@ bool read_title_file(
             title_rus[title_id] =  title_language;
         }
     }
-    return true;
 }
 
-bool read_basics_file(
-    const std::string& file_name_basics, const std::string& date,
-    const std::unordered_map<std::string, float>& title_rating,
-    const std::unordered_map<std::string, std::string>& title_rus,
-    std::vector<Movie>& movies
-) {
+void Parser::parse_basics_file(std::string file_name_basics, std::string date) {
     std::ifstream file_basics(file_name_basics);
-    if (!file_basics.is_open()) {
-        return false;
-    }
+
     std::string line;
     std::getline(file_basics, line);  // пропуск заголовка
     std::string tconst, title_type, primary_title;
@@ -103,5 +80,15 @@ bool read_basics_file(
             }
         }
     }
-    return true;
+}
+
+void Parser::sort() {
+    std::sort(movies.begin(), movies.end(), Comparator_Movie());
+}
+
+std::ostream& operator<<(std::ostream& os, const Parser& parser) {
+    for (const auto& movie : parser.get_movies()) {
+        os << movie.title << std::endl;
+    }
+    return os;
 }
