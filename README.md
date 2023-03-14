@@ -1,3 +1,7 @@
+# СБорка проекта
+cd build  
+cmake ../  
+make
 # Запуск программы
 Пример: ./dz1 ../dataset/title.akas.tsv ../dataset/title.ratings.tsv ../dataset/title.basics.tsv 2021              
 (файл с русскими названиями), (файл рейтинг), (файл с основной информацией), (год) 
