@@ -9,6 +9,5 @@ include_directories(include)
 add_executable(dz1 
     src/main.cpp
     src/error.cpp
-    src/Movie.cpp
     src/Parser.cpp
 )

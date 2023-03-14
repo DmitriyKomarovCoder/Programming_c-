@@ -22,6 +22,8 @@ int main(int argc, char *argv[]) {
     movies_parser.parse_title_file(file_name_title);
     movies_parser.parse_basics_file(file_name_basics, date);
 
+    movies_parser.sort();
+    
     std::cout << movies_parser << std::endl;
     return 0;
 }
