@@ -1,6 +1,6 @@
 # СБорка проекта
-cd build
-cmake ../
+cd build  
+cmake ../  
 make
 # Запуск программы
 Пример: ./dz1 ../dataset/title.akas.tsv ../dataset/title.ratings.tsv ../dataset/title.basics.tsv 2021              
