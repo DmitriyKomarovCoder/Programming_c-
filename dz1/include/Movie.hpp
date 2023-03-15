@@ -14,9 +14,13 @@ struct Movie {
     double rating;
 };
 
+// перегрузка оператора вывода для Movie
+std::ostream& operator<<(std::ostream& os, const std::vector<Movie>& movies);
+
 // сортировка значения по рейтингу
-struct Comparator_Movie {
+struct MovieComparator {
     bool operator()(const Movie& a, const Movie& b) const {
         return a.rating > b.rating;
     }
 };
+

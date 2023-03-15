@@ -3,27 +3,30 @@
 #include "error.hpp"
 
 int main(int argc, char *argv[]) {
-    std::string file_name_title = "";
-    std::string file_name_ratings = "";
-    std::string file_name_basics = "";
+    std::string fileNameTitle = "";
+    std::string fileNameRatings = "";
+    std::string fileNameBasics = "";
     std::string date = "";
 
-    if (!function_checking_arguments(
-        argc, argv, file_name_title,
-        file_name_ratings, file_name_basics,
+    if (!argumentsChecking(
+        argc, argv, fileNameTitle,
+        fileNameRatings, fileNameBasics,
         date)
     ) {
         return 1;
     }
     
-    Parser movies_parser;
+    Parser moviesParser;
     
-    movies_parser.parse_ratings_file(file_name_ratings);
-    movies_parser.parse_title_file(file_name_title);
-    movies_parser.parse_basics_file(file_name_basics, date);
+    moviesParser.ParseRatingsFile(fileNameRatings);
+    moviesParser.ParseTitleFile(fileNameTitle);
 
-    movies_parser.sort();
-    
-    std::cout << movies_parser << std::endl;
+    std::vector<Movie> movies;
+    moviesParser.ParseBasicsFile(fileNameBasics, date, movies);
+
+    std::sort(movies.begin(), movies.end(), MovieComparator());
+
+
+    std::cout << movies << std::endl;
     return 0;
 }

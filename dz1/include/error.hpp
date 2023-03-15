@@ -8,15 +8,15 @@
 #include <fstream>
 
 // проверка файлов
-bool function_checking_files(
-    const std::string& file_name_title,
-    const std::string& file_name_ratings,
-    const std::string& file_name_basics);
+bool filesChecking(
+    const std::string& fileNameTitle,
+    const std::string& fileNameRatings,
+    const std::string& fileNameBasics);
 
 // происходит проверк аргументов и их объявления
-bool function_checking_arguments(
+bool argumentsChecking(
     int num, char *argument[],
-    std::string& file_name_title,
-    std::string& file_name_ratings,
-    std::string& file_name_basics,
+    std::string& fileNameTitle,
+    std::string& fileNameRatings,
+    std::string& fileNameBasics,
     std::string& date);

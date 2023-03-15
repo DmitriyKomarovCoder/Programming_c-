@@ -10,4 +10,6 @@ add_executable(dz1
     src/main.cpp
     src/error.cpp
     src/Parser.cpp
+    src/Movie.cpp
+    src/file.cpp
 )

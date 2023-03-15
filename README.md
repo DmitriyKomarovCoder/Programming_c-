@@ -1,13 +1,19 @@
 # Сборка проекта
+```bash
 cd build  
 cmake ../  
 make
+```
 # Запуск программы
-Пример: ./dz1 ../dataset/title.akas.tsv ../dataset/title.ratings.tsv ../dataset/title.basics.tsv 2021              
+Пример: 
+```bash
+./dz1 ../dataset/title.akas.tsv ../dataset/title.ratings.tsv ../dataset/title.basics.tsv 2021
+```              
 (файл с русскими названиями), (файл рейтинг), (файл с основной информацией), (год) 
 # Для получения файлов воспользоваться:
+```bash
 ./download.sh
-
+```
 # Задание
 Необходимо разработать программу, которая обрабатывает данные онлайн сервиса IMDB.
 Датасеты можно скачать на официальном сайте IMDB https://datasets.imdbws.com/
