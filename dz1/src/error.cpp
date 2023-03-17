@@ -1,5 +1,10 @@
-// Copyright 2023 Kosmatoff
 #include "error.hpp"
+
+// является ли строка числом
+bool isStringDigit(const std::string& number) {
+    return (std::all_of(number.begin(), number.end(),
+    [](const char& ch) {return isdigit(ch);}));
+}
 
 bool checkFiles(
     const std::string& fileNameTitle,

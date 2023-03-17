@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include <fstream>
 
@@ -21,3 +22,5 @@ bool checkArguments(
     std::string& fileNameBasics,
     std::string& date,
     std::string& numberMoviesString);
+
+bool isStringDigit(const std::string& number);
