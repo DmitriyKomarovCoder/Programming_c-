@@ -13,13 +13,13 @@
 class Parser {
  public:
     // читает файл с рейтингом и парсит значений в titleRating
-    void ParseRatingsFile(const std::string& fileNameRatings);
+    void parseRatingsFile(const std::string& fileNameRatings);
 
     // читает файл с русскими значениями и парсит значений в titleRus
-    void ParseTitleFile(const std::string& fileNameTitle);
+    void parseTitleFile(const std::string& fileNameTitle);
 
     // читает файл с основной информацией и парсит значений в movies
-    void ParseBasicsFile(
+    void parseBasicsFile(
       const std::string& fileNameBasics,
       const std::string& date, 
       std::vector<Movie>& movies);

@@ -14,8 +14,8 @@ struct Movie {
     double rating;
 };
 
-// перегрузка оператора вывода для Movie
-std::ostream& operator<<(std::ostream& os, const std::vector<Movie>& movies);
+// выводит топ фильмы из вектора
+void coutTopMovies(std::vector<Movie> movies, const std::string& numberMovies);
 
 // сортировка значения по рейтингу
 struct MovieComparator {
@@ -23,4 +23,3 @@ struct MovieComparator {
         return a.rating > b.rating;
     }
 };
-

@@ -8,15 +8,16 @@
 #include <fstream>
 
 // проверка файлов
-bool filesChecking(
+bool checkFiles(
     const std::string& fileNameTitle,
     const std::string& fileNameRatings,
     const std::string& fileNameBasics);
 
 // происходит проверк аргументов и их объявления
-bool argumentsChecking(
+bool checkArguments(
     int num, char *argument[],
     std::string& fileNameTitle,
     std::string& fileNameRatings,
     std::string& fileNameBasics,
-    std::string& date);
+    std::string& date,
+    std::string& numberMoviesString);

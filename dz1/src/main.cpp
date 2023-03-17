@@ -7,26 +7,30 @@ int main(int argc, char *argv[]) {
     std::string fileNameRatings = "";
     std::string fileNameBasics = "";
     std::string date = "";
+    std::string numberMoviesString = "";
 
-    if (!argumentsChecking(
+    if (!checkArguments(
         argc, argv, fileNameTitle,
         fileNameRatings, fileNameBasics,
-        date)
+        date, numberMoviesString)
     ) {
         return 1;
     }
-    
+
+    if (!checkFiles(
+        fileNameTitle, fileNameRatings, fileNameBasics)) {
+        return false;
+    }
+
     Parser moviesParser;
-    
-    moviesParser.ParseRatingsFile(fileNameRatings);
-    moviesParser.ParseTitleFile(fileNameTitle);
+
+    moviesParser.parseRatingsFile(fileNameRatings);
+    moviesParser.parseTitleFile(fileNameTitle);
 
     std::vector<Movie> movies;
-    moviesParser.ParseBasicsFile(fileNameBasics, date, movies);
+    moviesParser.parseBasicsFile(fileNameBasics, date, movies);
 
     std::sort(movies.begin(), movies.end(), MovieComparator());
 
-
-    std::cout << movies << std::endl;
-    return 0;
+    coutTopMovies(movies, numberMoviesString);
 }

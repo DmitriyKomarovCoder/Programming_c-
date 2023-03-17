@@ -4,7 +4,7 @@
 #include "file.hpp"
 #include "movie_const.hpp"
 
-void Parser::ParseRatingsFile(const std::string& fileNameRatings) {
+void Parser::parseRatingsFile(const std::string& fileNameRatings) {
     std::ifstream fileRatings = openFile(fileNameRatings);
     
     std::string line;
@@ -25,7 +25,7 @@ void Parser::ParseRatingsFile(const std::string& fileNameRatings) {
     }
 }
 
-void Parser::ParseTitleFile(const std::string& fileNameTitle) {
+void Parser::parseTitleFile(const std::string& fileNameTitle) {
     std::ifstream fileTitle = openFile(fileNameTitle);
     
     std::string line;
@@ -45,7 +45,7 @@ void Parser::ParseTitleFile(const std::string& fileNameTitle) {
     }
 }
 
-void Parser::ParseBasicsFile(
+void Parser::parseBasicsFile(
       const std::string& fileNameBasics,
       const std::string& date,
       std::vector<Movie>& movies

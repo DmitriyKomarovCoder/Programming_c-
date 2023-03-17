@@ -3,3 +3,4 @@
 
 static const char splitter = '\t';
 static const std::string movie = "movie";
+static const int topMovies = 10;

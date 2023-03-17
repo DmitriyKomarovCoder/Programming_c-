@@ -1,10 +1,17 @@
 // Copyright 2023 Kosmatoff
 
 #include "Movie.hpp"
+#include "movie_const.hpp"
 
-std::ostream& operator<<(std::ostream& os, const std::vector<Movie>& movies) {
-    for (const auto& movie : movies) {
-        os << movie.title << std::endl;
+void coutTopMovies(std::vector<Movie> movies,
+                   const std::string& numberMoviesString
+) {
+    int numberMovies = topMovies;
+    if (!numberMoviesString.empty()) {
+//!!!!!!!!!!!!! добавить проверку на число !!!!!!!!!!!!!!!!!!
+        numberMovies = std::stoi(numberMoviesString);
     }
-    return os;
+    for (int i = 0; i < numberMovies; i++) {
+        std::cout << movies[i].title << " :" << movies[i].rating << std::endl;
+    }
 }
