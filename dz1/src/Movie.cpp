@@ -15,8 +15,8 @@ void coutTopMovies(std::vector<Movie> movies,
     if (numberMovies > movies.size()) {
         numberMovies = movies.size();
     }
-    
+
     for (int i = 0; i < numberMovies; i++) {
-        std::cout << movies[i].title << " :" << movies[i].rating << std::endl;
+        std::cout << movies[i].title << " : " << movies[i].rating << std::endl;
     }
 }

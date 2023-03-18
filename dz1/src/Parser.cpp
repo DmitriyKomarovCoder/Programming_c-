@@ -6,7 +6,7 @@
 
 void Parser::parseRatingsFile(const std::string& fileNameRatings) {
     std::ifstream fileRatings = openFile(fileNameRatings);
-    
+
     std::string line;
     std::string tconst, averageRating, numVotesStirng;
 
@@ -16,7 +16,7 @@ void Parser::parseRatingsFile(const std::string& fileNameRatings) {
         std::getline(ss, tconst, splitter);
         std::getline(ss, averageRating, splitter);
         std::getline(ss, numVotesStirng, splitter);
-        
+
         int numVotes = std::stoi(numVotesStirng);
         if (numVotes >= 1000) {  // проверка на условие по рейтингу
             float rating = std::stof(averageRating);
@@ -27,18 +27,18 @@ void Parser::parseRatingsFile(const std::string& fileNameRatings) {
 
 void Parser::parseTitleFile(const std::string& fileNameTitle) {
     std::ifstream fileTitle = openFile(fileNameTitle);
-    
+
     std::string line;
     std::string titleId, indif, titleLanguage, language;
 
     while (std::getline(fileTitle, line)) {
         std::stringstream ss(line);
-        
+
         std::getline(ss, titleId, splitter);
         std::getline(ss, indif, splitter);
         std::getline(ss, titleLanguage, splitter);
         std::getline(ss, language, splitter);
-        
+
         if (language == "RU") {
             titleRus[titleId] =  titleLanguage;
         }
@@ -51,7 +51,7 @@ void Parser::parseBasicsFile(
       std::vector<Movie>& movies
 ) {
     std::ifstream fileBasics = openFile(fileNameBasics);
-    
+
     std::string line;
     std::string tconst, titleType, primaryTitle;
     std::string originalTitle, isAdultStr, startYearStr;

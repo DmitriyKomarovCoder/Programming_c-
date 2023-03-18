@@ -23,4 +23,4 @@ bool checkArguments(
     std::string& date,
     std::string& numberMoviesString);
 
-bool isStringDigit(const std::string& number);
+bool isStringDigit(const std::string& str);

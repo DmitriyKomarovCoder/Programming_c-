@@ -21,7 +21,7 @@ class Parser {
     // читает файл с основной информацией и парсит значений в movies
     void parseBasicsFile(
       const std::string& fileNameBasics,
-      const std::string& date, 
+      const std::string& date,
       std::vector<Movie>& movies);
 
  private:

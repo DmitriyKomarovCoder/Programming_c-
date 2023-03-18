@@ -1,9 +1,13 @@
 #include "error.hpp"
 
 // является ли строка числом
-bool isStringDigit(const std::string& number) {
-    return (std::all_of(number.begin(), number.end(),
-    [](const char& ch) {return isdigit(ch);}));
+bool isStringDigit(const std::string& str) {
+    for (char c : str) {
+        if (!std::isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 bool checkFiles(
@@ -31,7 +35,7 @@ bool checkArguments(
     std::string& fileNameRatings, std::string& fileNameBasics,
     std::string& date, std::string& numberMoviesString
 ) {
-    if (num < 5) {  // проверка на пустоту (аргументы не ввели)
+    if (num < 5 || num > 6) {  // проверка на пустоту (аргументы не ввели)
         std::cout << "ERROR: Command line arguments are not specified"<< std::endl;
         return false;
     }
@@ -45,7 +49,7 @@ bool checkArguments(
             return false;
         }
     }
-    
+
     if (num == 6) {
         numberMoviesString.append(argument[5]);
     }
@@ -53,6 +57,12 @@ bool checkArguments(
     fileNameRatings.append(argument[2]);
     fileNameBasics.append(argument[3]);
     date.append(argument[4]);
+
+    // проверим является ли date числом
+    if (!isStringDigit(date)) {
+        std::cout << "ERROR: Argument date is not a number" << std::endl;
+        return false;
+    }
 
     return true;
 }
