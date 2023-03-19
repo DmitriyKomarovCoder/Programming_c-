@@ -1,0 +1,4 @@
+*.tsv
+information
+*.o
+.vscode
