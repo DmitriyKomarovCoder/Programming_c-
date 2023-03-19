@@ -1,36 +1,25 @@
 // Copyright 2023 Kosmatoff
 #include "Parser.hpp"
 #include "error.hpp"
+#include "console_parser.hpp"
 
 int main(int argc, char *argv[]) {
-    std::string fileNameTitle = "";
-    std::string fileNameRatings = "";
-    std::string fileNameBasics = "";
-    std::string date = "";
-    std::string numberMoviesString = "";
-
-    if (!checkArguments(
-        argc, argv, fileNameTitle,
-        fileNameRatings, fileNameBasics,
-        date, numberMoviesString)
-    ) {
-        return 1;
-    }
+    CommandLineArgs args = parseCommandLineArgs(argc, argv);
 
     if (!checkFiles(
-        fileNameTitle, fileNameRatings, fileNameBasics)) {
+        args.fileNameTitle, args.fileNameRatings, args.fileNameBasics)) {
         return false;
     }
 
     Parser moviesParser;
 
-    moviesParser.parseRatingsFile(fileNameRatings);
-    moviesParser.parseTitleFile(fileNameTitle);
+    moviesParser.parseRatingsFile(args.fileNameRatings);
+    moviesParser.parseTitleFile(args.fileNameTitle);
 
     std::vector<Movie> movies;
-    moviesParser.parseBasicsFile(fileNameBasics, date, movies);
+    moviesParser.parseBasicsFile(args.fileNameBasics, args.date, movies);
 
     std::sort(movies.begin(), movies.end(), MovieComparator());
 
-    coutTopMovies(movies, numberMoviesString);
+    coutTopMovies(movies, args.numberMoviesString);
 }

@@ -12,4 +12,5 @@ add_executable(dz1
     src/Parser.cpp
     src/Movie.cpp
     src/file.cpp
+    src/console_parser.cpp
 )

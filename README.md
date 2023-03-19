@@ -7,9 +7,8 @@ make
 # Запуск программы
 Пример: 
 ```bash
-./dz1 ../dataset/title.akas.tsv ../dataset/title.ratings.tsv ../dataset/title.basics.tsv 2021
+./dz1 -t ../dataset/title.akas.tsv -r ../dataset/title.ratings.tsv -b ../dataset/title.basics.tsv -d 2003 -n (не обязательный параметр) 15
 ```              
-(файл с русскими названиями), (файл рейтинг), (файл с основной информацией), (год) 
 # Для получения файлов воспользоваться:
 ```bash
 ./download.sh

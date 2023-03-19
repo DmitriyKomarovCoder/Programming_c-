@@ -13,9 +13,12 @@ void Parser::parseRatingsFile(const std::string& fileNameRatings) {
     while (std::getline(fileRatings, line)) {
         std::stringstream ss(line);
 
+        std::string tconst, averageRating, numVotesStirng;
         std::getline(ss, tconst, splitter);
         std::getline(ss, averageRating, splitter);
         std::getline(ss, numVotesStirng, splitter);
+
+        isRatingsFileCorrect(tconst, averageRating, numVotesStirng);
 
         int numVotes = std::stoi(numVotesStirng);
         if (numVotes >= 1000) {  // проверка на условие по рейтингу
@@ -29,15 +32,18 @@ void Parser::parseTitleFile(const std::string& fileNameTitle) {
     std::ifstream fileTitle = openFile(fileNameTitle);
 
     std::string line;
-    std::string titleId, indif, titleLanguage, language;
 
     while (std::getline(fileTitle, line)) {
+        std::string titleId, indif, titleLanguage, language;
+
         std::stringstream ss(line);
 
         std::getline(ss, titleId, splitter);
         std::getline(ss, indif, splitter);
         std::getline(ss, titleLanguage, splitter);
         std::getline(ss, language, splitter);
+
+        isTitleCorrect(titleId, indif, titleLanguage, language);
 
         if (language == "RU") {
             titleRus[titleId] =  titleLanguage;
@@ -53,11 +59,12 @@ void Parser::parseBasicsFile(
     std::ifstream fileBasics = openFile(fileNameBasics);
 
     std::string line;
-    std::string tconst, titleType, primaryTitle;
-    std::string originalTitle, isAdultStr, startYearStr;
 
     while (std::getline(fileBasics, line)) {
         std::stringstream ss(line);
+
+        std::string tconst, titleType, primaryTitle;
+        std::string originalTitle, isAdultStr, startYearStr;
 
         std::getline(ss, tconst, splitter);
         std::getline(ss, titleType, splitter);
@@ -65,6 +72,9 @@ void Parser::parseBasicsFile(
         std::getline(ss, originalTitle, splitter);
         std::getline(ss, isAdultStr, splitter);
         std::getline(ss, startYearStr, splitter);
+
+        isBasicsFileCorrect(tconst, titleType, primaryTitle,
+        originalTitle, isAdultStr, startYearStr);
 
         // зададим условия проверки
         bool isMovie = (titleType == movie);
