@@ -1,11 +1,11 @@
-#include "tailOperation.hpp"
+#include "tail.hpp"
 
 void TailOperation::processLine(const std::string& str) {
     buffer_.push_back(str);
     if (buffer_.size() > n_) {
         buffer_.pop_front();
     }
- }
+}
 
 void TailOperation::handleEndOfInput() {
 

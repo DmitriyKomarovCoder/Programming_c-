@@ -1,5 +1,5 @@
-#include <openFile.hpp>
-#include <fileError.hpp>
+#include "openFile.hpp"
+#include "Error.hpp"
 
 std::ifstream openFile(const std::string& fileName) {
     std::ifstream file(fileName);

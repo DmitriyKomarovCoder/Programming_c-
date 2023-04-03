@@ -1,11 +1,11 @@
-#include <cat.hpp>
+#include "cat.hpp"
 
 void CatOperation::processLine(const std::string& str) {
     buffer_.push_back(str);
 }
 
 void CatOperation::handleEndOfInput() {
-    std::ifstream fileCat = std::move(openFile(fileName_)); // ?
+    std::ifstream fileCat = std::move(openFile(fileName_));
     std::string line;
     
     while (std::getline(fileCat, line)) {
@@ -25,6 +25,6 @@ void CatOperation::handleEndOfInput() {
 }
 
 void CatOperation::setNextOperation(std::unique_ptr<Ioperation>&& next) {
-    next_ = move(next);
+    next_ = std::move(next);
 }
 
