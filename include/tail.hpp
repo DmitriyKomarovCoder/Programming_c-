@@ -14,7 +14,7 @@ class TailOperation : public Ioperation {
     explicit TailOperation(const size_t n) : n_(n) {}
     void processLine(const std::string& message) override;
     void handleEndOfInput() override;
-    void setNextOperation(std::unique_ptr<Ioperation>&& next) override; // возможен следует передавать lvalue
+    void setNextOperation(std::unique_ptr<Ioperation>&& next) override;
 
  private:
     size_t n_;

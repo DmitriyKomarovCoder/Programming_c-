@@ -48,7 +48,7 @@ jobs:
 
       - name: Run Valgrind
         run: |
-          valgrind --leak-check=full ./cpp_executable/dz2
+          valgrind --leak-check=full ./cpp_executable/dz2 'echo 1 | cat file_1.txt | cat file_2.txt'
           if [ $? -ne 0 ]; then exit 1; fi
         shell: bash
 

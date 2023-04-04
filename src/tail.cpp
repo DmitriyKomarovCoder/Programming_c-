@@ -22,5 +22,5 @@ void TailOperation::handleEndOfInput() {
 }
 
 void TailOperation::setNextOperation(std::unique_ptr<Ioperation>&& next) {
-    next_ = move(next);
+    next_ = std::move(next);
 }

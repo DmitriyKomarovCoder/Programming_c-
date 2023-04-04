@@ -4,9 +4,9 @@
 #include "Error.hpp"
 
 int main(int argc, char *argv[]) {
+   std::vector<std::unique_ptr<Ioperation>> conveyorOperation;
    try {
-      std::vector<std::unique_ptr<Ioperation>> conveyorOperation = commandParser(argc, argv);
-      
+      conveyorOperation = commandParser(argc, argv);
       // раскрутка конвейера
       conveyorOperation[0]->handleEndOfInput();
    } catch (Error& e) {
