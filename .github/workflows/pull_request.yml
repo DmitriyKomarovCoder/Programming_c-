@@ -1,0 +1,88 @@
+name: C++ CI
+
+on:
+  pull_request:
+    branches: 
+      - master
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build code
+        run: |
+          mkdir build
+          cd build 
+          cmake ..
+          make
+        shell: bash
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: cpp_executable
+          path: build/MyProject
+
+  dynamic-analysis:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Valgrind
+        run: sudo apt-get install valgrind 
+
+      - name: Download executable
+        uses: actions/download-artifact@v3
+        with:
+          name: cpp_executable
+          path: ./cpp_executable
+
+      - name: Check folder
+        run: chmod +x ./cpp_executable/MyProject
+
+      - name: Run Valgrind
+        run: |
+          valgrind --leak-check=full ./cpp_executable/MyProject
+          if [ $? -ne 0 ]; then exit 1; fi
+        shell: bash
+
+      - name: Upload Valgrind results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: valgrind-results
+          path: valgrind-results.txt
+
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Cppcheck
+        run: sudo apt-get install cppcheck
+
+      - name: Run Cppcheck
+        run: cppcheck --enable=all --suppress=missingInclude --include=include .
+        id: cppcheck
+
+      - name: Upload Cppcheck results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cppcheck-results
+          path: cppcheck-results.xml
+
+      - name: Install Clang-Format
+        run: sudo apt-get install clang-format
+
+      - name: Run Clang-Format
+        run: |
+          if [ "$(clang-format --version | head -n 1 | awk '{print $3}' | cut -d'.' -f1)" != "10" ]; then echo "Wrong version of clang-format installed" && exit 1; fi
+          clang-format -style=file -output-replacements-xml **/*.cpp **/*.h | grep -c "<replacement " >/dev/null && echo "Code formatting issues found" && exit 1 || echo "Code is properly formatted"
+        shell: bash
