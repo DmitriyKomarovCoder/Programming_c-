@@ -14,3 +14,5 @@ add_executable(dz2
     src/openFile.cpp
     src/tail.cpp
 )
+
+add_executable(${PROJECT_NAME} ${SOURCES})
