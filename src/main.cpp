@@ -11,6 +11,7 @@ int main(int argc, char *argv[]) {
       conveyorOperation[0]->handleEndOfInput();
    } catch (Error& e) {
       std::cerr << e.what() << std::endl;
+      return 1;
    }
 
    return 0;
