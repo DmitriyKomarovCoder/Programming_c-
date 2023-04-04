@@ -16,8 +16,8 @@ jobs:
 
       - name: Build code
         run: |
-          mkdir build
-          cd build 
+          mkdir dz2/build
+          cd dz2/build 
           cmake ..
           make
         shell: bash
