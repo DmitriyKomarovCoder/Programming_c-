@@ -4,9 +4,7 @@ project(dz2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include_directories(include)
-
-add_executable(dz2 
+set(SOURCES
     src/cat.cpp
     src/commandParser.cpp
     src/echo.cpp
@@ -14,5 +12,8 @@ add_executable(dz2
     src/openFile.cpp
     src/tail.cpp
 )
+
+include_directories(include)
+
 
 add_executable(${PROJECT_NAME} ${SOURCES})
