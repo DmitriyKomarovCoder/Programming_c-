@@ -17,7 +17,7 @@ std::vector<std::unique_ptr<Ioperation>> commandParser(int argc, char *argv[]) {
     if (argc != 2) {
         throw ArgsError{"Failed argument's empty"};
     }
-    
+
     std::string stringCommand(argv[1]);
     std::stringstream ss(stringCommand);
     std::string operationStr;

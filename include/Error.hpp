@@ -7,18 +7,18 @@ struct Error : public std::runtime_error {
     using std::runtime_error::runtime_error;
 };
 
-struct FileError : public std::runtime_error {
-    using std::runtime_error::runtime_error;
+struct FileError : public Error {
+    using Error::Error;
 };
 
-struct ArgsError : public std::runtime_error {
-    using std::runtime_error::runtime_error;
+struct ArgsError : public Error {
+    using Error::Error;
 };
 
-struct ParserUnknow : public std::runtime_error {
-    using std::runtime_error::runtime_error;
+struct ParserUnknow : public Error {
+    using Error::Error;
 };
 
-struct EchoError : public std::runtime_error {
-    using std::runtime_error::runtime_error;
+struct EchoError : public Error {
+    using Error::Error;
 };
