@@ -83,6 +83,5 @@ jobs:
 
       - name: Run Clang-Format
         run: |
-          if [ "$(clang-format --version | head -n 1 | awk '{print $3}' | cut -d'.' -f1)" != "10" ]; then echo "Wrong version of clang-format installed" && exit 1; fi
           clang-format -style=file -output-replacements-xml **/*.cpp **/*.h | grep -c "<replacement " >/dev/null && echo "Code formatting issues found" && exit 1 || echo "Code is properly formatted"
         shell: bash
