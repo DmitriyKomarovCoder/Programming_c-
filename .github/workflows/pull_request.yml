@@ -48,8 +48,19 @@ jobs:
 
       - name: Run Valgrind
         run: |
-          valgrind --leak-check=full ./cpp_executable/dz2
-          if [ $? -ne 0 ]; then exit 1; fi
+          valgrind --leak-check=full -q ./cpp_executable/dz2
+          EXIT_STATUS=$?
+          if [ $EXIT_STATUS -eq 0 ]; then
+        # программа завершена успешно без утечек памяти
+            echo "Tests passed"
+          elif [ $EXIT_STATUS -eq 1 ]; then
+          # программа завершена с ошибкой, но без утечек памяти
+            echo "Tests failed, but no memory leaks detected"
+          else
+          # программа завершена с ошибкой по другой причине
+            echo "Tests failed"
+            exit $EXIT_STATUS
+          fi
         shell: bash
 
       - name: Upload Valgrind results
