@@ -1,6 +1,6 @@
 #pragma once
 
-#include <fstream>
 #include <string>
+#include <fstream>
 
 std::ifstream openFile(const std::string& fileName);

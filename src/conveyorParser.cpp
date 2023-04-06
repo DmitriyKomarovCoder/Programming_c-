@@ -1,7 +1,13 @@
-#include "commandParser.hpp"
+#include <sstream>
+
+#include "conveyorParser.hpp"
 #include "Error.hpp"
 
-// константы
+#include "tail.hpp"
+#include "cat.hpp"
+#include "echo.hpp"
+
+
 const char pipe = '|';
 const std::string catOperation = "cat";
 const std::string echoOperation = "echo";
@@ -13,16 +19,10 @@ std::string trim(const std::string& str) {
     return str.substr(first, last - first + 1);
 }
 
-std::vector<std::unique_ptr<Ioperation>> commandParser(int argc, char *argv[]) {
-    if (argc != 2) {
-        throw ArgsError{"Failed argument's empty"};
-    }
-
-    std::string stringCommand(argv[1]);
+void ConveyorParser::commandParser(const std::string& stringCommand) {
     std::stringstream ss(stringCommand);
     std::string operationStr;
     std::vector<std::unique_ptr<Ioperation>> pipeLine;
-
     while (std::getline(ss, operationStr, pipe)) {
         operationStr = trim(operationStr);
         std::stringstream operationStream(operationStr);
@@ -59,5 +59,6 @@ std::vector<std::unique_ptr<Ioperation>> commandParser(int argc, char *argv[]) {
     for(int i = pipeLine.size() - 2; i >= 0; --i) {
         pipeLine[i]->setNextOperation(std::move(pipeLine[i+1]));
     }
-    return pipeLine;
+    firstPtr = std::move(pipeLine[0]);
+
 }

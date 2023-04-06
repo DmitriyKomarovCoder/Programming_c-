@@ -12,7 +12,7 @@ class EchoOperation : public Ioperation {
    explicit EchoOperation(const std::string& message);
    void processLine(const std::string& message) override;
    void handleEndOfInput() override;
-   void setNextOperation(std::unique_ptr<Ioperation>&& next) override; // возможен следует передавать lvalue
+   void setNextOperation(std::unique_ptr<Ioperation>&& next) override;
     
  private:
    std::vector<std::string> buffer_;

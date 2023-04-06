@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "cat.hpp"
 
 void CatOperation::processLine(const std::string& str) {

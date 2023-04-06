@@ -1,14 +1,23 @@
 #include <iostream>
 
-#include "commandParser.hpp"
+#include "ioperation.hpp"
+#include "conveyorParser.hpp"
 #include "Error.hpp"
 
 int main(int argc, char *argv[]) {
-   std::vector<std::unique_ptr<Ioperation>> conveyorOperation;
+   ConveyorParser conveyorOperation;
    try {
-      conveyorOperation = commandParser(argc, argv);
+      if (argc != 2) {
+        throw ArgsError{"Failed argument's empty"};
+      }
+
+      std::string stringCommand(argv[1]);
+ 
+      conveyorOperation.commandParser(stringCommand);
+      std::unique_ptr<Ioperation> conveyorPtr = conveyorOperation.getPtr();
+      
       // раскрутка конвейера
-      conveyorOperation[0]->handleEndOfInput();
+      conveyorPtr->handleEndOfInput();
    } catch (Error& e) {
       std::cerr << e.what() << std::endl;
       return 1;

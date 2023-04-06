@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCES
     src/cat.cpp
-    src/commandParser.cpp
+    src/conveyorParser.cpp
     src/echo.cpp
     src/main.cpp
     src/openFile.cpp

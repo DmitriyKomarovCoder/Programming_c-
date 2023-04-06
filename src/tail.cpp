@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "tail.hpp"
 
 void TailOperation::processLine(const std::string& str) {

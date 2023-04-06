@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "echo.hpp"
 
 EchoOperation::EchoOperation(const std::string& message) {
