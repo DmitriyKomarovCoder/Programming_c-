@@ -2,16 +2,14 @@
 
 #include "echo.hpp"
 
-EchoOperation::EchoOperation(const std::string& message) {
-    buffer_.push_back(message);
-}
-
 void EchoOperation::processLine(const std::string& message) {
     buffer_.push_back(message);
 }
 
 void EchoOperation::handleEndOfInput() {
     
+    processLine(echo_str);
+
     for (const auto& line : buffer_) {
         if (next_) {
             next_->processLine(line);
