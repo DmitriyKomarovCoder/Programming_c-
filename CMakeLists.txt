@@ -11,7 +11,7 @@ set(SOURCES
     src/main.cpp
     src/openFile.cpp
     src/tail.cpp
-    src/conveyorOperation.cpp
+    src/conveyor.cpp
 )
 
 include_directories(include)

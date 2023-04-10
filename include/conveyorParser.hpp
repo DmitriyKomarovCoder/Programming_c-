@@ -9,12 +9,11 @@
 
 class ConveyorParser {
  public:
+    explicit ConveyorParser(char *argv);
+
     // создает связанную цепочку из операций
-    void commandParser(const std::string& stringCommand);
-    std::unique_ptr<Ioperation> getPtr() {
-        return std::move(firstPtr);
-    }
+    std::unique_ptr<Ioperation> parse();
+
  private:
-    // хранит указатель на первую операцию
-    std::unique_ptr<Ioperation> firstPtr;
+    std::string stringCommand;
 };

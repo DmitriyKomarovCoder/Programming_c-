@@ -19,7 +19,11 @@ std::string trim(const std::string& str) {
     return str.substr(first, last - first + 1);
 }
 
-void ConveyorParser::commandParser(const std::string& stringCommand) {
+ConveyorParser::ConveyorParser(char *argv) {
+    stringCommand = argv;
+}
+
+std::unique_ptr<Ioperation> ConveyorParser::parse() {
     std::stringstream ss(stringCommand);
     std::string operationStr;
     std::vector<std::unique_ptr<Ioperation>> pipeLine;
@@ -59,6 +63,6 @@ void ConveyorParser::commandParser(const std::string& stringCommand) {
     for(int i = pipeLine.size() - 2; i >= 0; --i) {
         pipeLine[i]->setNextOperation(std::move(pipeLine[i+1]));
     }
-    firstPtr = std::move(pipeLine[0]);
 
+    return std::move(pipeLine[0]);
 }

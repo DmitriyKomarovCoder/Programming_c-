@@ -4,11 +4,13 @@
 
 #include <memory>
 #include "ioperation.hpp"
+#include "conveyorParser.hpp"
 
-class ConveyorOperation {
+class Conveyor {
  public:
-    void setConveyorPtr(std::unique_ptr<Ioperation>&& conveyorPtr);
-    void runPipeline();
+    Conveyor() = default;
+    Conveyor& operator=(std::unique_ptr<Ioperation>&& ptr);
+    void run();
  private:
     std::unique_ptr<Ioperation> conveyorPtr_;
 };
