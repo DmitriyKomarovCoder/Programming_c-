@@ -12,8 +12,7 @@ int main(int argc, char *argv[]) {
         }
  
         ConveyorParser opParser(argv[1]);
-        Conveyor conv;
-        conv = opParser.parse();
+        Conveyor conv = opParser.parse();
         // раскрутка конвейера
         conv.run();
         

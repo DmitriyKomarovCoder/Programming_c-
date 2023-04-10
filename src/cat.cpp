@@ -9,7 +9,7 @@ void CatOperation::processLine(const std::string& str) {
 void CatOperation::handleEndOfInput() {
     std::ifstream fileCat = std::move(openFile(fileName_));
     std::string line;
-    
+
     while (std::getline(fileCat, line)) {
         processLine(line);
     }

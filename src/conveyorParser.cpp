@@ -1,4 +1,7 @@
 #include <sstream>
+#include <string>
+#include <vector>
+#include <memory>
 
 #include "conveyorParser.hpp"
 #include "Error.hpp"
@@ -6,7 +9,6 @@
 #include "tail.hpp"
 #include "cat.hpp"
 #include "echo.hpp"
-
 
 const char pipe = '|';
 const std::string catOperation = "cat";
@@ -23,7 +25,7 @@ ConveyorParser::ConveyorParser(char *argv) {
     stringCommand = argv;
 }
 
-std::unique_ptr<Ioperation> ConveyorParser::parse() {
+Conveyor ConveyorParser::parse() {
     std::stringstream ss(stringCommand);
     std::string operationStr;
     std::vector<std::unique_ptr<Ioperation>> pipeLine;
@@ -63,6 +65,7 @@ std::unique_ptr<Ioperation> ConveyorParser::parse() {
     for(int i = pipeLine.size() - 2; i >= 0; --i) {
         pipeLine[i]->setNextOperation(std::move(pipeLine[i+1]));
     }
-
-    return std::move(pipeLine[0]);
+    Conveyor conv;
+    conv.setConveyorPtr(std::move(pipeLine[0]));
+    return std::move(conv);
 }
